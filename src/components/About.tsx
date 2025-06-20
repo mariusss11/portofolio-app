@@ -1,5 +1,5 @@
-import React from 'react';
 import { skills, experiences } from '../data/portfolio';
+import React, { useRef, useEffect, useState } from 'react';
 
 const SkillBar: React.FC<{ skill: typeof skills[0] }> = ({ skill }) => (
   <div className="mb-4">
@@ -15,6 +15,47 @@ const SkillBar: React.FC<{ skill: typeof skills[0] }> = ({ skill }) => (
     </div>
   </div>
 );
+
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      options
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [options]);
+
+  return [ref, inView] as const;
+}
+
+// Counter component
+const Counter: React.FC<{ end: number; duration?: number }> = ({ end, duration = 2500 }) => {
+  const [ref, inView] = useInView({ threshold: 0.3 });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const increment = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [end, duration, inView]);
+
+  return <span ref={ref}>{count.toLocaleString()}</span>;
+};
 
 export const About: React.FC = () => {
   const skillCategories = {
@@ -33,8 +74,7 @@ export const About: React.FC = () => {
             About Me
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I'm a passionate backend developer with 6+ years of experience building robust, 
-            scalable systems that power modern applications and serve millions of users.
+            I'm a passionate developer building robust, scalable systems that power modern applications.
           </p>
         </div>
 
@@ -46,25 +86,42 @@ export const About: React.FC = () => {
             </h3>
             <div className="prose prose-lg dark:prose-invert">
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                I specialize in designing and implementing high-performance backend systems, RESTful and GraphQL APIs, 
-                microservices architectures, and cloud-native solutions. My focus is on writing clean, maintainable code 
-                that scales efficiently under load.
+                I specialize in designing and implementing high-performance backend systems and RESTful APIs, microservices architectures, 
+                and cloud-native solutions. My focus is on writing clean, maintainable code that scales efficiently under load.
               </p>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                When I'm not architecting systems, you'll find me optimizing database queries, exploring new technologies, 
-                contributing to open-source projects, or mentoring fellow developers in system design and best practices.
+                When I'm not architecting systems, you'll find me optimizing code, using tools like SonarQube, exploring new technologies, 
+                or mentoring fellow mates in system design and best practices.
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">100M+</div>
+              {/* <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-500">100M+</div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">API Requests Handled</div>
+              </div> */}
+               <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  <Counter end={15000} />+
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Lines of code</div>
               </div>
               <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  <Counter end={5} />+
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Projects</div>
+              </div>
+              <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">           
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  <Counter end={100} />%
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Happy clients</div>
+              </div>
+              {/* <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                 <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">6+</div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">Years Experience</div>
-              </div>
+              </div> */}
             </div>
           </div>
 
