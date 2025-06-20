@@ -76,11 +76,11 @@ export const skills: Skill[] = [
 ];
 
 export const socials: Social[] = [
-  { name: 'GitHub', url: 'https://github.com/mariusss11', icon: 'Github' },
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/marius-carchilan-066860273/', icon: 'Linkedin' },
-  { name: 'Telegram', url: 'https://t.me/mar_fnl', icon: 'Telegram' },
-  // { name: 'Twitter', url: 'https://twitter.com', icon: 'Twitter' },
-  { name: 'Email', url: 'mailto:mariuscarchilan07@gmail.com', icon: 'Mail' }
+  { name: 'GitHub', url: 'https://github.com/mariusss11', icon: 'github' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/marius-carchilan-066860273/', icon: 'linkedin' },
+  { name: 'Telegram', url: 'https://t.me/mar_fnl', icon: 'telegram' },
+  // { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
+  { name: 'Email', url: 'mailto:mariuscarchilan07@gmail.com', icon: 'mail' }
 ];
 
 export const githubUrl = 'https://github.com/mariusss11';

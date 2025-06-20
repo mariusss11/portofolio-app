@@ -1,11 +1,13 @@
 import React from 'react';
-import { Linkedin, Mail, Phone, MapPin } from 'lucide-react'; 
+import { Linkedin, Mail, Phone, MapPin, Send, Github } from 'lucide-react'; 
 import { socials } from '../data/portfolio';
 
 export const Contact: React.FC = () => {
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   linkedin: Linkedin,
-  mail: Mail
+  telegram: Send,
+  github: Github,
+  mail: Mail,
 };
 
   return (
@@ -66,13 +68,10 @@ export const Contact: React.FC = () => {
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
                 Connect With Me
               </h3>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 mb-8">
                 {socials.map((social) => {
                   const IconComponent = iconMap[social.icon];
-                  if (!IconComponent) {
-                    console.warn(`Icon "${social.icon}" not found in iconMap`);
-                    return null; // or render a placeholder
-                  }
+                  if (!IconComponent) return null;
                   return (
                     <a
                       key={social.name}
