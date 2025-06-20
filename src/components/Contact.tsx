@@ -1,14 +1,12 @@
 import React from 'react';
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Mail, Phone, MapPin } from 'lucide-react'; 
 import { socials } from '../data/portfolio';
 
 export const Contact: React.FC = () => {
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-    Github,
-    Linkedin,
-    Twitter,
-    Mail
-  };
+  linkedin: Linkedin,
+  mail: Mail
+};
 
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -37,7 +35,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900 dark:text-white">Email</h4>
-                    <p className="text-gray-600 dark:text-gray-300">alex@backend-dev.com</p>
+                    <p className="text-gray-600 dark:text-gray-300">mariuscarchilan07@gmail.com</p>
                   </div>
                 </div>
                 
@@ -47,7 +45,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900 dark:text-white">Phone</h4>
-                    <p className="text-gray-600 dark:text-gray-300">+1 (555) 987-6543</p>
+                    <p className="text-gray-600 dark:text-gray-300">+373 610 800 18</p>
                   </div>
                 </div>
                 
@@ -57,7 +55,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900 dark:text-white">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Seattle, WA</p>
+                    <p className="text-gray-600 dark:text-gray-300">Chisinau</p>
                   </div>
                 </div>
               </div>
@@ -71,6 +69,10 @@ export const Contact: React.FC = () => {
               <div className="flex space-x-4">
                 {socials.map((social) => {
                   const IconComponent = iconMap[social.icon];
+                  if (!IconComponent) {
+                    console.warn(`Icon "${social.icon}" not found in iconMap`);
+                    return null; // or render a placeholder
+                  }
                   return (
                     <a
                       key={social.name}

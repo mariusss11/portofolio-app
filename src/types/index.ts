@@ -25,6 +25,7 @@ export interface Social {
 export interface Experience {
   title: string;
   company: string;
+  companyUrl?: string;
   period: string;
   description: string;
 }

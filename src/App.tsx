@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -19,7 +18,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400">
-              © 2024 Alex Johnson. Built with React, Tailwind CSS, and lots of ☕ | Backend Developer
+              © {new Date().getFullYear()} Marius Carchilan | Developer
             </p>
           </div>
         </div>

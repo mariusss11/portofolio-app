@@ -116,7 +116,7 @@ export const About: React.FC = () => {
                 <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   <Counter end={100} />%
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">Happy clients</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Success rate</div>
               </div>
               {/* <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                 <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">6+</div>
@@ -175,13 +175,18 @@ export const About: React.FC = () => {
             Professional Experience
           </h3>
           <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <div key={index} className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+            {experiences.map((exp) => (
+              <div key={exp.title} className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <div>
                     <h4 className="text-xl font-semibold text-gray-900 dark:text-white">{exp.title}</h4>
-                    <p className="text-blue-600 dark:text-blue-400 font-medium">{exp.company}</p>
-                  </div>
+                    <a
+                      href={exp.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >{exp.company}</a>
+                  </div>  
                   <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-600 px-3 py-1 rounded-full mt-2 md:mt-0">
                     {exp.period}
                   </span>

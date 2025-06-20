@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ExternalLink, Github, Filter, Server, Database, Cloud } from 'lucide-react';
-import { projects } from '../data/portfolio';
+import { projects, githubUrl } from '../data/portfolio';
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'featured'>('all');
@@ -89,9 +89,14 @@ export const Projects: React.FC = () => {
         </div>
         
         <div className="flex justify-between items-center">
-          <button className="text-blue-600 dark:text-blue-400 font-medium text-sm hover:underline">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 dark:text-blue-400 font-medium text-sm hover:underline"
+          >
             View Details
-          </button>
+          </a>
           <div className="flex space-x-2">
             {project.githubUrl && (
               <a
@@ -165,7 +170,7 @@ export const Projects: React.FC = () => {
 
         <div className="text-center mt-12">
           <a
-            href="https://github.com"
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

@@ -45,8 +45,9 @@ export const Header: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="font-bold text-xl text-gray-900 dark:text-white">
-            Portfolio
+          <div className="font-bold text-xl text-gray-900 dark:text-white flex items-center">
+            {/* <img src="/images/logo.png" alt="Logo" className="h-14 w-18 mr-0" /> */}
+            My Web Portfolio
           </div>
 
           {/* Desktop Navigation */}
